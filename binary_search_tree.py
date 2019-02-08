@@ -22,9 +22,21 @@ class Node:
         elif node.key < p.key:
             p.left = node
         else:
-            p.right = node        
+            p.right = node
 
-            
+    def isContains(self, key):
+        x = self
+        while x is not None:
+            if x.key == key:
+                return True
+            else:
+                if key < x.key:
+                    x = x.left
+                else:
+                    x = x.right
+        return False
+
+
 def printNodes(node):
     print(' '.join(inOrder(node)))
     print(' '.join(preOrder(node)))
@@ -58,5 +70,11 @@ for i in range(V):
             node = Node(key)
         else:
             node.insert(Node(key))
+    elif command.startswith('find'):
+        key = int(command.split()[1])
+        if node is None:
+            print("no")
+        else:
+            print("yes") if node.isContains(key) else print("no")
     else:
         printNodes(node)
